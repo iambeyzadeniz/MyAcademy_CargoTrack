@@ -1,0 +1,46 @@
+﻿@using CargoTrack.DTO.DTOs.AboutDtos
+
+@model List<ResultAboutDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Hakkımızda</h1>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning text-center" role="alert">
+        Henüz Hakkımızda bilgisi oluşturulmamış.
+    </div>
+    <a href="/Admin/About/Create" class="btn btn-dark">Yeni Hakkımızda Oluştur</a>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+
+        <tr>
+            <th>#</th>
+            <th>Görsel</th>
+            <th>Başlık</th>
+            <th>Açıklama</th>
+            <th>İşlemler</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.Id</th>
+                <td><img src="@item.ImageUrl" alt="@item.Title" width="80" /></td>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>
+                    <a href="/Admin/About/Delete" class="btn btn-danger">Sil</a>
+                    <a href="/Admin/About/Update/@item.Id" class="btn btn-info">Güncelle</a>
+                </td>
+            </tr>
+        }
+    </table>
+    <a href="/Admin/About/Create" class="btn btn-dark"> Yeni Hakkımızda Oluştur</a>
+}
+
